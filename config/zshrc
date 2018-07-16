@@ -1,0 +1,28 @@
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+CASE_SENSITIVE="false"
+HYPHEN_INSENSITIVE="false"
+
+
+
+# Oh My ZSH plugins
+plugins=(
+	gitfast
+	git-extras
+	django
+	osx
+	python
+	brew
+	extract
+	rake
+	rvm
+	ruby
+	rails
+	postgres
+	thefuck)
+
+
+# Source me up
+source $ZSH/oh-my-zsh.sh
+source $HOME/.shell_env

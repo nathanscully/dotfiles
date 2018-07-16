@@ -1,0 +1,2 @@
+bhilburn/powerlevel9k
+zsh-users/zsh-syntax-highlighting
