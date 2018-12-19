@@ -1,6 +1,47 @@
 #!/usr/bin/env zsh
 
 
+# SEXY
+GEOMETRY_COLOR_EXIT_VALUE="magenta"         # prompt symbol color when exit value is != 0
+GEOMETRY_COLOR_PROMPT="yellow"              # prompt symbol color
+GEOMETRY_COLOR_ROOT="red"                   # root prompt symbol color
+GEOMETRY_COLOR_DIR="blue"                   # current directory color
+GEOMETRY_PROMPT_PREFIX=$'\n'                # prefix prompt with a new line
+GEOMETRY_PROMPT_SUFFIX=$'\n  >'             # suffix prompt
+GEOMETRY_PROMPT_PREFIX_SPACER=" "           # string to place between prefix and symbol
+GEOMETRY_SYMBOL_SPACER=" "                  # string to place between symbol and directory
+GEOMETRY_DIR_SPACER=" "                     # string to place between directory and suffix
+GEOMETRY_PLUGIN_SEPARATOR=" "               # use ' ' to separate right prompt parts
+GEOMETRY_SYMBOL_PROMPT="💀"
+GEOMETRY_SYMBOL_RPROMPT="◇"                 # multiline prompts
+GEOMETRY_SYMBOL_EXIT_VALUE="🔥"             # displayed when exit value is != 0
+GEOMETRY_SYMBOL_ROOT="👹"                   # when logged in user is root
+
+
+GEOMETRY_SYMBOL_GIT_UNPULLED="⇣"              # when there are unpulled changes
+GEOMETRY_SYMBOL_GIT_UNPUSHED="⇡"              # when there are unpushed changes
+PROMPT_GEOMETRY_GIT_TIME=false
+GEOMETRY_GIT_SEPARATOR=":"
+
+GEOMETRY_PLUGIN_HYDRATE_COLOR=blue
+GEOMETRY_PLUGIN_HYDRATE_SYMBOL=💧
+GEOMETRY_PLUGIN_HYDRATE_INTERVAL=20  # interval in minutes
+GEOMETRY_PLUGIN_HYDRATE_BINDKEY='^L' # wrap ^L bind to also hydrate
+
+GEOMETRY_SYMBOL_KUBE="⎈"
+
+GEOMETRY_PROMPT_PLUGINS=(+hydrate git)
+GEOMETRY_PROMPT_PLUGINS_SECONDARY=(git)
+
+# tell omz where it lives
+export ZSH="$ANTIBODY_HOME"/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh
+
+# quit bugging me!
+DISABLE_AUTO_UPDATE="true"
+
+# DISABLE_AUTO_UPDATE=true
+# ZSH="${HOME}/.cache/antibody/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
+
 # === Plugins ===
 antibody bundle < "$HOME/.antibody" > "$HOME/.zsh-plugins"
 source "$HOME/.zsh-plugins"
@@ -11,31 +52,9 @@ source "$HOME/.zsh-plugins"
 source "$HOME/.shell/.exports"
 source "$HOME/.shell/.aliases"
 source "$HOME/.shell/.functions"
+source "$HOME/.shell/.k8rc"
 
+# === Secrets ===
 
-# SEXY
-POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_start"
-POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0B2'
-POWERLEVEL9K_FOLDER_ICON=''
-
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="blue"
-POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
-
-POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="yellow"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="blue"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
-POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
-
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=" > "
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs rvm anaconda nvm kubecontext)
-
+source "$HOME/.shell/.work_secrets"
+source "$HOME/.shell/.personal_secrets"

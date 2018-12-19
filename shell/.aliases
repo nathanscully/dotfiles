@@ -2,8 +2,23 @@
 
 # === Aliases ===
 
+# = Shortcuts =
+alias d="cd ~/Documents"
+alias db="cd ~/Dropbox"
+alias gd="cd ~/Google\ Drive"
+alias lib="cd ~/Library"
+alias dl="cd ~/Downloads"
+alias dt="cd ~/Desktop"
+alias p="cd ~/Documents/Projects"
+alias pers="cd ~/Documents/Personal"
+alias o="open ."
+alias g="git"
+alias h="history"
+alias j="jobs"
+alias sb="cd ~/Documents/Projects/Sandbox"
+alias e="atom"
 
-# = Navigation = 
+# = Navigation =
 alias l="exa -abghl --git"
 alias o="open"
 alias oo="open ."
@@ -15,7 +30,6 @@ alias .....="cd ../../../.."
 
 # = App Shortcuts =
 alias g="git"
-
 
 # = Utils =
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -31,4 +45,27 @@ alias spotoff="sudo mdutil -a -i off"
 alias spoton="sudo mdutil -a -i on"
 alias stfu="osascript -e 'set volume output muted true'"
 alias pumpitup="osascript -e 'set volume 7'"
+alias cleanup_dsstore="find . -name '*.DS_Store' -type f -ls -delete"
 
+# Update installed Ruby gems, Homebrew, npm, and their installed packages
+alias brew_update="brew -v update; brew upgrade --force-bottle --cleanup; brew cleanup; brew cask cleanup; brew prune; brew doctor; npm-check -g -u"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# List git branches on the local machine sorted by recent updates, adding a star to remote tracking branches
+function git_list_branches() {
+  RED="\e[91m";
+  for branch in $(git branch | sed s/^..//); do
+    time_ago=$(git log -1 --pretty=format:"%Cgreen%ci %Cblue%cr%Creset" $branch --);
+    # Add a red star to mark branches that are tracking something upstream
+    tracks_upstream=$(if [ "$(git rev-parse $branch@{upstream} 2>/dev/null)" ]; then printf "$RED★"; fi);
+    printf "%-53s - %s %s\n" $time_ago $branch $tracks_upstream;
+  done | sort;
+}
+
+# Download file and save it with filename of remote file
+alias get="curl -O -L"
+
+alias hosts='sudo $EDITOR /etc/hosts'
+alias flushdns="dscacheutil -flushcache"

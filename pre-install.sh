@@ -11,3 +11,12 @@ else
   chmod +x $OMZDIR/tools/upgrade.sh
   $OMZDIR/tools/upgrade.sh
 fi
+
+which -s brew
+if [[ $? != 0 ]] ; then
+  echo "Homebrew not found. Installing..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  echo "Homebrew already installed! Updating..."
+  brew update
+fi
